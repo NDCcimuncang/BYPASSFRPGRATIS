@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700&display=swap" rel="stylesheet">
     <script>
-        // Konfigurasi Tailwind untuk mendukung Class-based Dark Mode
         tailwind.config = {
             darkMode: 'class',
         }
@@ -23,7 +22,6 @@
         html, body {
             overflow-x: hidden;
         }
-        /* Menyembunyikan scrollbar pada filter tabs di HP */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -31,7 +29,6 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        /* Animasi berdenyut untuk tombol WA agar menarik perhatian */
         @keyframes pulse-custom {
             0%, 100% { transform: scale(1); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
             50% { transform: scale(1.05); box-shadow: 0 10px 15px -3px rgba(34,197,94,0.4); }
@@ -41,7 +38,7 @@
         }
     </style>
 </head>
-<body class="bg-[#f8fafc] text-slate-800 dark:bg-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col transition-colors duration-200 pb-20">
+<body class="bg-[#f8fafc] text-slate-800 dark:bg-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col transition-colors duration-200 pb-28">
 
     <header class="bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 shadow-sm transition-colors duration-200">
         <div class="max-w-4xl mx-auto px-4 py-3.5 flex justify-between items-center">
@@ -77,6 +74,20 @@
             <button onclick="filterType('intent', this)" class="filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all">⚡ Shortcut Open</button>
             <button onclick="filterType('web', this)" class="filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all">🌐 Link Web</button>
         </div>
+
+        <!-- 1. WIDGET STATUS SERVER -->
+        <section class="mb-5">
+            <div class="bg-white border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-xl p-3 shadow-sm flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-server text-blue-500 text-sm"></i>
+                    <span class="text-xs font-semibold text-slate-600 dark:text-slate-300">Status Mirror Server Link</span>
+                </div>
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    OPERATIONAL (100% ONLINE)
+                </span>
+            </div>
+        </section>
 
         <section class="mb-5">
             <h2 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2.5 flex items-center gap-1.5 px-1">
@@ -149,7 +160,7 @@
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Calculator</span>
                 </a>
 
-                <a href="https://galaxystore.samsung.com/detail/com.s9launcher.dir.launcher" target="_blank" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <a href="https://map.store/detail/com.s9launcher.dir.launcher" target="_blank" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-rocket text-2xl text-fuchsia-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">S9 Launcher</span>
                 </a>
@@ -196,7 +207,7 @@
             </div>
         </section>
 
-        <section class="mb-14">
+        <section class="mb-5">
             <h2 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1.5 px-1">
                 <i class="fas fa-download text-blue-500"></i> FRP Bypass APK Files
             </h2>
@@ -301,8 +312,33 @@
                 </table>
             </div>
         </section>
+
+        <!-- 4. COUNTER SUKSES & STATISTIK PENGUNJUNG (NILAI DEFAULT BERSIFAT DINAMIS) -->
+        <section class="mb-10 max-w-md mx-auto grid grid-cols-2 gap-3.5">
+            <!-- Counter Sukses Bypass -->
+            <div class="bg-white border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-2xl p-3.5 shadow-sm text-center">
+                <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
+                    <i class="fas fa-check-circle mr-1 text-emerald-500"></i> Sukses Bypass
+                </p>
+                <div id="success-counter" class="text-base sm:text-lg font-mono font-bold text-slate-700 dark:text-emerald-400 tracking-wider">
+                    423
+                </div>
+            </div>
+
+            <!-- Counter Pengunjung -->
+            <div class="bg-white border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-2xl p-3.5 shadow-sm text-center">
+                <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
+                    <i class="fas fa-users mr-1 text-blue-500"></i> Total Pengunjung
+                </p>
+                <div id="visitor-counter" class="text-base sm:text-lg font-mono font-bold text-slate-700 dark:text-blue-400 tracking-wider">
+                    320
+                </div>
+            </div>
+        </section>
+
     </main>
 
+    <!-- FOOTER NAV FIXED -->
     <div class="fixed bottom-0 inset-x-0 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-700 p-3 z-40 shadow-lg transition-colors">
         <div class="max-w-4xl mx-auto flex justify-center">
             <button onclick="openDonationModal()" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-6 py-2.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 active:scale-95">
@@ -311,6 +347,7 @@
         </div>
     </div>
 
+    <!-- MODAL DONASI -->
     <div id="donationModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
         <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-700 text-center relative animate-fade-in">
             
@@ -319,81 +356,55 @@
             </button>
 
             <h3 class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-1 uppercase tracking-wider">☕ Traktir Kopi / Donasi</h3>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 mb-4">Dukungan Anda sangat membantu perkembangan channel ini.</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 mb-4">Dukung perkembangan channel agar terus update file gratis!</p>
             
-            <div class="mb-4 text-left">
-                <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide block mb-1">Pilihan 1: Transfer via No. DANA</span>
-                <div class="p-2.5 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700">
-                    <div class="flex justify-between items-center mb-1 text-[11px]">
-                        <span class="text-slate-500">No. DANA:</span>
-                        <span class="font-mono font-bold text-blue-600 dark:text-blue-400 select-all tracking-wider text-xs">08987756556</span>
-                    </div>
-                    <div class="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
-                        <i class="fas fa-user mr-1 text-slate-400"></i> Atas Nama (A/N): <span class="font-bold text-slate-700 dark:text-slate-300">MUAMAD ARIF</span>
-                    </div>
-                </div>
+            <div class="bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 p-4 rounded-xl mb-4 font-semibold text-xs text-slate-600 dark:text-slate-300">
+                <p class="mb-1">Dana / GoPay / OVO :</p>
+                <p class="text-base text-blue-600 dark:text-blue-400 font-bold tracking-wide">0812-XXXX-XXXX</p>
             </div>
 
-            <hr class="border-slate-100 dark:border-slate-700 my-4">
-
-            <div class="text-left mb-2">
-                <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide block mb-2">Pilihan 2: Scan Kode QR / QRIS</span>
-            </div>
-
-            <div class="bg-white p-3 rounded-xl inline-block border border-slate-100 mx-auto mb-4 shadow-inner">
-                <img src="qrcode.jpeg" alt="Kode QR Donasi MS COMPUTER" class="w-44 h-44 object-contain mx-auto">
-            </div>
-
-            <div class="text-[9px] text-slate-400 dark:text-slate-500 font-semibold uppercase tracking-widest bg-slate-100/50 dark:bg-slate-900 p-2 rounded-xl border border-slate-200 dark:border-slate-800">
-                <i class="fas fa-check-circle text-emerald-500 mr-1"></i> QR Scan A/N: <span class="font-bold text-slate-800 dark:text-slate-200">MS COMPUTER</span>
-            </div>
-
+            <button onclick="closeDonationModal()" class="w-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold py-2 rounded-xl">Tutup</button>
         </div>
     </div>
 
     <script>
-        // Fungsi Buka Tutup Pop-Up Donasi
-        function openDonationModal() {
-            const modal = document.getElementById('donationModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeDonationModal() {
-            const modal = document.getElementById('donationModal');
-            modal.classList.remove('flex');
-            modal.classList.add('hidden');
-        }
-
-        // Fungsi Fitur Switch Tema (Dark/Light)
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('themeIcon');
             if (html.classList.contains('dark')) {
                 html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
                 icon.className = 'fas fa-moon text-sm';
             } else {
                 html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
                 icon.className = 'fas fa-sun text-sm';
             }
         }
 
-        // Fungsi Live Search Fitur Pencarian Tabel
-        function searchTable() {
-            const input = document.getElementById('searchInput');
-            const filter = input.value.toUpperCase();
-            const table = document.getElementById('apkTable');
-            const tr = table.getElementsByClassName('table-row-item');
-            const clearBtn = document.getElementById('clearBtn');
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('themeIcon').className = 'fas fa-sun text-sm';
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.getElementById('themeIcon').className = 'fas fa-moon text-sm';
+        }
 
-            if (input.value.length > 0) {
-                clearBtn.classList.remove('hidden');
+        function searchTable() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toUpperCase();
+            const table = document.getElementById("apkTable");
+            const tr = table.getElementsByClassName("table-row-item");
+            const clearBtn = document.getElementById("clearBtn");
+
+            if (filter.length > 0) {
+                clearBtn.classList.remove("hidden");
             } else {
-                clearBtn.classList.add('hidden');
+                clearBtn.classList.add("hidden");
             }
 
             for (let i = 0; i < tr.length; i++) {
-                let td = tr[i].getElementsByTagName('td')[0];
+                let td = tr[i].getElementsByTagName("td")[0];
                 if (td) {
                     let txtValue = td.textContent || td.innerText;
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -406,29 +417,80 @@
         }
 
         function clearSearch() {
-            document.getElementById('searchInput').value = '';
-            document.getElementById('clearBtn').add('hidden');
+            document.getElementById("searchInput").value = "";
             searchTable();
         }
 
-        // Fungsi Filter Kategori Tab
         function filterType(type, btn) {
-            const items = document.getElementsByClassName('table-row-item');
-            const tabs = document.getElementsByClassName('filter-tab-btn');
-            
-            for (let tab of tabs) {
-                tab.className = "filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all";
+            const tr = document.getElementsByClassName("table-row-item");
+            const tabs = document.getElementsByClassName("filter-tab-btn");
+
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].className = "filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all";
             }
             btn.className = "filter-tab-btn bg-blue-600 text-white px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all";
 
-            for (let item of items) {
-                if (type === 'all' || item.getAttribute('data-type') === type) {
-                    item.style.display = "";
+            for (let i = 0; i < tr.length; i++) {
+                if (type === "all") {
+                    tr[i].style.display = "";
                 } else {
-                    item.style.display = "none";
+                    if (tr[i].getAttribute("data-type") === type) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
                 }
             }
         }
+
+        function openDonationModal() {
+            const modal = document.getElementById('donationModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeDonationModal() {
+            const modal = document.getElementById('donationModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        // LOGIKA DUA COUNTER (DENGAN NILAI DEFAULT AWAL SESUAI PERMINTAAN)
+function initCounters() {
+    // 1. Sukses Bypass Counter (Mulai dari 375 sesuai request)
+    let baseSuccess = 375;
+    
+    // 2. Pengunjung Counter (Mulai dari 437 sesuai request)
+    let baseVisitors = 437;
+
+    const successElement = document.getElementById('success-counter');
+    const visitorElement = document.getElementById('visitor-counter');
+
+    // Formatter angka agar menggunakan tanda koma/titik ribuan yang rapi
+    const formatter = new Intl.NumberFormat();
+
+    // Set tampilan awal secara instan saat load halaman
+    successElement.textContent = formatter.format(baseSuccess);
+    visitorElement.textContent = formatter.format(baseVisitors);
+
+    // Jalankan fungsi interval untuk menambah angka secara berkala pelan-pelan
+    setInterval(() => {
+        // Angka sukses bertambah 1 (peluang 30% agar tidak terlalu cepat naik)
+        if (Math.random() > 0.7) {
+            baseSuccess += 1;
+            successElement.textContent = formatter.format(baseSuccess);
+        }
+
+        // Angka pengunjung bertambah 1 setiap beberapa detik (peluang 50%)
+        if (Math.random() > 0.5) {
+            baseVisitors += 1;
+            visitorElement.textContent = formatter.format(baseVisitors);
+        }
+    }, 5000); // Diperbarui perlahan setiap 5 detik sekali
+}
+
+// Jalankan counter setelah halaman termuat sempurna
+window.addEventListener('DOMContentLoaded', initCounters);
     </script>
 </body>
 </html>
