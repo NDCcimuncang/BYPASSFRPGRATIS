@@ -336,12 +336,45 @@
         </section>
     </main>
 
-    <!-- FLOATING WA DONATION BUTTON -->
-    <a href="https://wa.me/628987756556?text=Halo%20NDCTutorial%2C%20saya%20mau%20traktir%20kopi%20%2F%20donasi%20bantuan%20FRP%20Bypass." target="_blank" class="fixed bottom-4 right-4 z-50 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:bg-emerald-600 active:scale-90 transition-all animate-wa" title="Donasi / Traktir Kopi">
-        <i class="fab fa-whatsapp text-3xl"></i>
-    </a>
+  <div id="donationModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-700 text-center relative">
+            
+            <button onclick="closeDonationModal()" class="absolute top-3.5 right-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl focus:outline-none">
+                <i class="fas fa-times-circle"></i>
+            </button>
 
-    <!-- FOOTER -->
+            <h3 class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-1 uppercase tracking-wider">☕ Traktir Kopi / Donasi</h3>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 mb-4">Dukungan Anda sangat membantu perkembangan channel ini.</p>
+            
+            <div class="mb-4 text-left">
+                <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide block mb-1">Pilihan 1: Transfer via No. DANA</span>
+                <div class="p-2.5 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700">
+                    <div class="flex justify-between items-center mb-1 text-[11px]">
+                        <span class="text-slate-500">No. DANA:</span>
+                        <span class="font-mono font-bold text-blue-600 dark:text-blue-400 select-all tracking-wider text-xs">08987756556</span>
+                    </div>
+                    <div class="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
+                        <i class="fas fa-user mr-1 text-slate-400"></i> Atas Nama (A/N): <span class="font-bold text-slate-700 dark:text-slate-300">MUAMAD ARIF</span>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-slate-100 dark:border-slate-700 my-4">
+
+            <div class="text-left mb-2">
+                <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide block mb-2">Pilihan 2: Scan Kode QR / QRIS</span>
+            </div>
+
+            <div class="bg-white p-3 rounded-xl inline-block border border-slate-100 mx-auto mb-4 shadow-inner">
+                <img src="qrcode.jpeg" alt="Kode QR Donasi MS COMPUTER" class="w-44 h-44 object-contain mx-auto">
+            </div>
+
+            <div class="text-[9px] text-slate-400 dark:text-slate-500 font-semibold uppercase tracking-widest bg-slate-100/50 dark:bg-slate-900 p-2 rounded-xl border border-slate-200 dark:border-slate-800">
+                <i class="fas fa-check-circle text-emerald-500 mr-1"></i> QR Scan A/N: <span class="font-bold text-slate-800 dark:text-slate-200">MS COMPUTER</span>
+            </div>
+
+        </div>
+    </div>    <!-- FOOTER -->
     <footer class="text-center py-6 text-[10px] text-slate-400 border-t border-slate-200 bg-white mt-auto transition-colors duration-200 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-500">
         <p>© 2026 BYPASS FRP GRATIS bY <a href="https://www.youtube.com/@NDCTutorial" target="_blank" class="hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors">https://www.youtube.com/@NDCTutorial</a>.</p>
     </footer>
