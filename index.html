@@ -9,6 +9,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Konfigurasi Tailwind untuk mendukung Class-based Dark Mode
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -17,159 +23,209 @@
         html, body {
             overflow-x: hidden;
         }
+        /* Menyembunyikan scrollbar pada filter tabs di HP */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
-<body class="bg-[#f8fafc] text-slate-800 antialiased min-h-screen flex flex-col">
+<body class="bg-[#f8fafc] text-slate-800 dark:bg-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col transition-colors duration-200">
 
-    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-sm active:bg-slate-50 transition-colors">
+    <!-- HEADER -->
+    <header class="bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 shadow-sm transition-colors duration-200">
         <div class="max-w-4xl mx-auto px-4 py-3.5 flex justify-between items-center">
-            <h1 class="flex items-center gap-2 font-bold text-sm sm:text-base tracking-wide text-blue-600 uppercase">
+            <h1 class="flex items-center gap-2 font-bold text-sm sm:text-base tracking-wide text-blue-600 dark:text-blue-400 uppercase">
                 <i class="fas fa-unlock-alt text-amber-500"></i> BYPASS FRP GRATIS
             </h1>
-            <span class="text-[9px] sm:text-[10px] bg-blue-50 border border-blue-200 text-blue-600 px-2 py-0.5 rounded font-mono font-bold tracking-wide">ONLINE v2026</span>
+            
+            <div class="flex items-center gap-3">
+                <!-- Theme Toggle Button -->
+                <button onclick="toggleTheme()" class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-amber-400 hover:scale-105 active:scale-95 transition-all" title="Ubah Tema">
+                    <i id="themeIcon" class="fas fa-moon text-sm"></i>
+                </button>
+                <span class="text-[9px] sm:text-[10px] bg-blue-50 border border-blue-200 text-blue-600 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-400 px-2 py-0.5 rounded font-mono font-bold tracking-wide">ONLINE v2026</span>
+            </div>
         </div>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="max-w-4xl mx-auto px-3 py-4 w-full flex-grow">
 
-        <div class="mb-4 relative">
+        <!-- SEARCH BAR -->
+        <div class="mb-3 relative">
             <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
                 <i class="fas fa-search text-xs"></i>
             </span>
-            <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Cari APK, XML, atau Shortcut..." class="w-full pl-9 pr-8 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 placeholder-slate-400 shadow-sm transition-all duration-200">
-            <button onclick="clearSearch()" id="clearBtn" class="hidden absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600">
+            <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Cari APK, XML, atau Shortcut..." class="w-full pl-9 pr-8 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 dark:focus:ring-blue-500/20 placeholder-slate-400 dark:placeholder-slate-500 shadow-sm transition-all duration-200">
+            <button onclick="clearSearch()" id="clearBtn" class="hidden absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
                 <i class="fas fa-times-circle text-sm"></i>
             </button>
         </div>
 
+        <!-- QUICK FILTER TABS -->
+        <div class="flex gap-1.5 overflow-x-auto pb-3.5 mb-2.5 no-scrollbar text-[11px] font-semibold select-none">
+            <button onclick="filterType('all', this)" class="filter-tab-btn bg-blue-600 text-white px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all">Semua File</button>
+            <button onclick="filterType('apk', this)" class="filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all">🤖 Android APK</button>
+            <button onclick="filterType('xml', this)" class="filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all">📄 Config XML</button>
+            <button onclick="filterType('intent', this)" class="filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all">⚡ Shortcut Open</button>
+            <button onclick="filterType('web', this)" class="filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all">🌐 Link Web</button>
+        </div>
+
+        <!-- SECTION 1: DIRECT OPEN SHORTCUTS -->
         <section class="mb-5">
-            <h2 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2.5 flex items-center gap-1.5 px-1">
+            <h2 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2.5 flex items-center gap-1.5 px-1">
                 <i class="fas fa-external-link-alt text-blue-500"></i> Open Settings & Apps Directly
             </h2>
             
             <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1.5 text-center text-[11px]">
                 
-                <a href="intent://com.android.settings/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
-                    <i class="fas fa-cog text-2xl text-slate-600"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Settings</span>
+                <!-- Settings -->
+                <a href="intent://com.android.settings/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                    <i class="fas fa-cog text-2xl text-slate-600 dark:text-slate-400"></i>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Settings</span>
                 </a>
 
-                <a href="intent://com.sec.android.app.samsungapps/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Galaxy Store -->
+                <a href="intent://com.sec.android.app.samsungapps/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-store text-2xl text-rose-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Galaxy Store</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Galaxy Store</span>
                 </a>
 
-                <a href="intent://com.google.android.googlequicksearchbox/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Google -->
+                <a href="intent://com.google.android.googlequicksearchbox/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fab fa-google text-2xl text-blue-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Google</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Google</span>
                 </a>
 
-                <a href="intent://com.google.android.gms/#Intent;scheme=promote_smartlock_scheme;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Smartlock -->
+                <a href="intent://com.google.android.gms/#Intent;scheme=promote_smartlock_scheme;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-key text-2xl text-emerald-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Smartlock</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Smartlock</span>
                 </a>
 
-                <a href="intent://com.vivo.easyshare/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Easy Share -->
+                <a href="intent://com.vivo.easyshare/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-exchange-alt text-2xl text-cyan-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Easy Share</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Easy Share</span>
                 </a>
 
-                <a href="intent://com.coloros.backuprestore/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Oppo Clone Phone -->
+                <a href="intent://com.coloros.backuprestore/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-mobile-alt text-2xl text-green-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Oppo Clone</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Oppo Clone</span>
                 </a>
 
-                <a href="intent://com.google.android.apps.googleassistant/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Assistant -->
+                <a href="intent://com.google.android.apps.googleassistant/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-microphone text-2xl text-indigo-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Assistant</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Assistant</span>
                 </a>
 
-                <a href="intent://com.sec.android.app.myfiles/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Samsung Files -->
+                <a href="intent://com.sec.android.app.myfiles/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-folder text-2xl text-orange-400"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Samsung File</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Samsung File</span>
                 </a>
 
-                <a href="intent://com.mi.android.globalFileexplorer/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Mi Files -->
+                <a href="intent://com.mi.android.globalFileexplorer/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-folder-open text-2xl text-amber-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Mi Files</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Mi Files</span>
                 </a>
 
-                <a href="intent://com.activitymanager/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Activity Manager -->
+                <a href="intent://com.activitymanager/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-bolt text-2xl text-purple-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Activity Mngr</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Activity Mngr</span>
                 </a>
 
-                <a href="https://apps.samsung.com/appquery/appDetail.as?appId=com.sec.android.app.sbrowser&cld-000005006635" target="_blank" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Samsung Web -->
+                <a href="https://apps.samsung.com/appquery/appDetail.as?appId=com.sec.android.app.sbrowser&cld-000005006635" target="_blank" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-globe-asia text-2xl text-blue-600"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Samsung Web</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Samsung Web</span>
                 </a>
 
-                <a href="intent://com.sec.android.app.popupcalculator/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Calculator -->
+                <a href="intent://com.sec.android.app.popupcalculator/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-calculator text-2xl text-teal-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Calculator</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Calculator</span>
                 </a>
 
-                <a href="https://galaxystore.samsung.com/detail/com.s9launcher.dir.launcher" target="_blank" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- S9 Launcher -->
+                <a href="https://galaxystore.samsung.com/detail/com.s9launcher.dir.launcher" target="_blank" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-rocket text-2xl text-fuchsia-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">S9 Launcher</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">S9 Launcher</span>
                 </a>
 
-                <a href="tel:123456789" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Dial Pad -->
+                <a href="tel:123456789" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-phone-alt text-2xl text-emerald-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Dial Pad</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Dial Pad</span>
                 </a>
 
-                <a href="https://com.google.android.gm/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Gmail -->
+                <a href="https://com.google.android.gm/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-envelope text-2xl text-red-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Gmail</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Gmail</span>
                 </a>
 
-                <a href="intent://com.google.android.apps.maps/#Intent;scheme=android-app;end%22%3E" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Google Maps -->
+                <a href="intent://com.google.android.apps.maps/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-map-marked-alt text-2xl text-rose-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Map</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Map</span>
                 </a>
 
-                <a href="intent://com.google.android.gsf.login.LoginActivity/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Login Account -->
+                <a href="intent://com.google.android.gsf.login.LoginActivity/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-user-circle text-2xl text-indigo-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Login Account</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Login Account</span>
                 </a>
 
-                <a href="intent://com.sec.android.app.launcher/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Home Launcher -->
+                <a href="intent://com.sec.android.app.launcher/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-home text-2xl text-slate-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Home Launch</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Home Launch</span>
                 </a>
 
-                <a href="https://galaxy.store/setting" target="_blank" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Hidden Settings -->
+                <a href="https://galaxy.store/setting" target="_blank" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-sliders-h text-2xl text-amber-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Hidden Set</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Hidden Set</span>
                 </a>
 
-                <a href="tel:100-000-000/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- ADB Code -->
+                <a href="tel:100-000-000/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-hashtag text-2xl text-amber-600"></i>
-                    <span class="text-[9px] text-slate-600 font-bold leading-none select-all">*#0*# (ADB)</span>
+                    <span class="text-[9px] text-slate-600 dark:text-slate-400 font-bold leading-none select-all">*#0*# (ADB)</span>
                 </a>
 
-                <a href="intent://com.sec.android.app.myfiles/#Intent;scheme=android-app;end" class="p-2 bg-white active:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                <!-- Files Generic -->
+                <a href="intent://com.sec.android.app.myfiles/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-folder text-2xl text-yellow-500"></i>
-                    <span class="text-slate-600 font-medium leading-tight truncate w-full">Files</span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Files</span>
                 </a>
 
             </div>
         </section>
 
+        <!-- SECTION 2: APK FILES LIST/TABLE -->
         <section>
-            <h2 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5 px-1">
+            <h2 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1.5 px-1">
                 <i class="fas fa-download text-blue-500"></i> FRP Bypass APK Files
             </h2>
-            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+            <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm transition-colors duration-200">
                 <table class="w-full text-left border-collapse" id="apkTable">
                     <thead>
-                        <tr class="bg-slate-50 border-b border-slate-200 text-[10px] font-bold text-slate-500 uppercase tracking-wide">
+                        <tr class="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide">
                             <th class="p-3 pl-3.5">App Name & Source Link</th>
                             <th class="p-3 text-right pr-3.5 w-24">Link</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100 text-xs">
+                    <tbody class="divide-y divide-slate-100 dark:divide-slate-700 text-xs">
                         
                         <script>
                             const listApk = [
@@ -225,27 +281,27 @@
                             listApk.forEach(item => {
                                 let icon = "fa-android text-emerald-500";
                                 let btnText = "APK";
-                                let btnColor = "bg-blue-600 active:bg-blue-700 shadow-sm shadow-blue-100";
+                                let btnColor = "bg-blue-600 active:bg-blue-700 shadow-sm shadow-blue-100 dark:shadow-none";
                                 let target = item.type !== "intent" ? 'target="_blank"' : '';
 
                                 if (item.type === "xml") {
                                     icon = "fa-file-code text-amber-500";
                                     btnText = "XML";
-                                    btnColor = "bg-amber-500 active:bg-amber-600 shadow-sm shadow-amber-100";
+                                    btnColor = "bg-amber-500 active:bg-amber-600 shadow-sm shadow-amber-100 dark:shadow-none";
                                 } else if (item.type === "web") {
                                     icon = "fa-globe text-blue-500";
                                     btnText = "Web";
-                                    btnColor = "bg-slate-700 active:bg-slate-800 shadow-sm";
+                                    btnColor = "bg-slate-700 active:bg-slate-800 dark:bg-slate-600 dark:active:bg-slate-500 shadow-sm";
                                 } else if (item.type === "intent") {
                                     icon = "fa-external-link-square-alt text-cyan-500";
                                     btnText = "Open";
-                                    btnColor = "bg-cyan-600 active:bg-cyan-700 shadow-sm shadow-cyan-100";
+                                    btnColor = "bg-cyan-600 active:bg-cyan-700 shadow-sm shadow-cyan-100 dark:shadow-none";
                                 }
 
                                 document.write(`
-                                    <tr class="active:bg-slate-50 transition duration-75 table-row-item">
+                                    <tr class="active:bg-slate-50 dark:active:bg-slate-700/50 transition duration-75 table-row-item" data-type="${item.type}">
                                         <td class="p-3 pl-3.5 pr-1">
-                                            <div class="font-semibold text-slate-700 flex items-start gap-2 max-w-[210px] sm:max-w-none break-words">
+                                            <div class="font-semibold text-slate-700 dark:text-slate-300 flex items-start gap-2 max-w-[210px] sm:max-w-none break-words">
                                                 <i class="fas ${icon} text-sm mt-0.5 flex-shrink-0"></i> 
                                                 <span class="leading-snug">${item.name}</span>
                                             </div>
@@ -266,14 +322,41 @@
         </section>
     </main>
 
-    <footer class="text-center py-6 text-[10px] text-slate-400 border-t border-slate-200 bg-white mt-auto">
-        <p>© 2026 BYPASS FRP GRATIS bY <a href="https://www.youtube.com/@NDCTutorial" target="_blank" class="hover:text-blue-500 font-medium transition-colors">https://www.youtube.com/@NDCTutorial</a>.</p>
+    <!-- FOOTER -->
+    <footer class="text-center py-6 text-[10px] text-slate-400 dark:text-slate-500 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 mt-auto transition-colors duration-200">
+        <p>© 2026 BYPASS FRP GRATIS bY <a href="https://www.youtube.com/@NDCTutorial" target="_blank" class="hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors">https://www.youtube.com/@NDCTutorial</a>.</p>
     </footer>
 
     <script>
+        let currentTypeFilter = 'all';
+
+        // --- SISTEM TEMA (LIGHT/DARK) ---
+        // Cek pengaturan sebelumnya di browser saat halaman pertama dimuat
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('themeIcon').className = 'fas fa-sun text-sm';
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.getElementById('themeIcon').className = 'fas fa-moon text-sm';
+        }
+
+        function toggleTheme() {
+            const icon = document.getElementById('themeIcon');
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                icon.className = 'fas fa-moon text-sm';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                icon.className = 'fas fa-sun text-sm';
+            }
+        }
+
+        // --- SISTEM PENCARIAN & FILTER TAB ---
         function searchTable() {
-            var input = document.getElementById("searchInput").value;
-            var clearBtn = document.getElementById("clearBtn");
+            const input = document.getElementById("searchInput").value;
+            const clearBtn = document.getElementById("clearBtn");
             
             if (input.length > 0) {
                 clearBtn.classList.remove("hidden");
@@ -281,13 +364,54 @@
                 clearBtn.classList.add("hidden");
             }
 
-            var filter = input.toUpperCase();
-            var rows = document.getElementsByClassName("table-row-item");
-            for (var i = 0; i < rows.length; i++) {
-                var td = rows[i].getElementsByTagName("td")[0];
+            applySearchAndFilter();
+        }
+
+        function filterType(type, buttonElement) {
+            currentTypeFilter = type;
+            
+            // Ubah gaya tombol aktif
+            const buttons = document.getElementsByClassName("filter-tab-btn");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].className = "filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all";
+            }
+            
+            if (buttonElement) {
+                buttonElement.className = "filter-tab-btn bg-blue-600 text-white px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all";
+            }
+
+            applySearchAndFilter();
+        }
+
+        function applySearchAndFilter() {
+            const filterSearch = document.getElementById("searchInput").value.toUpperCase();
+            const rows = document.getElementsByClassName("table-row-item");
+
+            for (let i = 0; i < rows.length; i++) {
+                const td = rows[i].getElementsByTagName("td")[0];
+                const rowType = rows[i].getAttribute("data-type");
+                
+                let matchSearch = false;
+                let matchType = false;
+
+                // Validasi Pencarian teks
                 if (td) {
-                    var text = td.textContent || td.innerText;
-                    rows[i].style.display = text.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+                    const text = td.textContent || td.innerText;
+                    if (text.toUpperCase().indexOf(filterSearch) > -1) {
+                        matchSearch = true;
+                    }
+                }
+
+                // Validasi Kategori Filter Tab
+                if (currentTypeFilter === 'all' || rowType === currentTypeFilter) {
+                    matchType = true;
+                }
+
+                // Tampilkan baris jika memenuhi kedua kriteria
+                if (matchSearch && matchType) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
                 }
             }
         }
@@ -295,7 +419,7 @@
         function clearSearch() {
             document.getElementById("searchInput").value = "";
             document.getElementById("clearBtn").classList.add("hidden");
-            searchTable();
+            applySearchAndFilter();
         }
     </script>
 </body>
