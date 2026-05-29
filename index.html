@@ -9,58 +9,130 @@
 </head>
 <body class="bg-[#121214] text-gray-200 antialiased font-sans">
 
+    <!-- HEADER -->
     <header class="bg-[#1a1a1e] border-b border-gray-800 sticky top-0 z-50 shadow-md">
         <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
-            <h1 class="flex items-center gap-2 font-bold text-base tracking-wide text-blue-400 uppercase">
+            <h1 class="flex items-center gap-2 font-bold text-sm sm:text-base tracking-wide text-blue-400 uppercase">
                 <i class="fas fa-unlock-alt text-yellow-500"></i> BYPASS FRP GRATIS
             </h1>
             <span class="text-[10px] bg-blue-950/50 border border-blue-800 text-blue-400 px-2 py-0.5 rounded font-mono">ONLINE v2026</span>
         </div>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="max-w-4xl mx-auto px-3 py-5">
 
+        <!-- SEARCH BAR -->
         <div class="mb-5 relative">
             <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                 <i class="fas fa-search text-xs"></i>
             </span>
-            <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Cari APK atau Shortcut..." class="w-full pl-9 pr-4 py-2 bg-[#1a1a1e] border border-gray-800 rounded text-sm text-gray-200 focus:outline-none focus:border-blue-500 placeholder-gray-600">
+            <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Cari APK, XML, atau Shortcut Pintasan..." class="w-full pl-9 pr-4 py-2 bg-[#1a1a1e] border border-gray-800 rounded text-sm text-gray-200 focus:outline-none focus:border-blue-500 placeholder-gray-600">
         </div>
 
+        <!-- SECTION 1: DIRECT OPEN SHORTCUTS -->
         <section class="mb-6">
             <h2 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-1">
                 <i class="fas fa-external-link-alt text-blue-500"></i> Open Settings & Apps Directly
             </h2>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-center text-xs">
                 
-                <a href="intent://com.android.settings/#Intent;scheme=android-app;end" class="p-3 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded text-center transition flex flex-col items-center justify-center gap-1 group">
-                    <i class="fas fa-cog text-xl text-gray-400 group-hover:text-blue-400"></i>
-                    <span class="text-xs text-gray-400 font-medium">Open Settings</span>
+                <!-- Bawaan Sebelumnya -->
+                <a href="intent://com.android.settings/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-cog text-lg text-gray-400 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Open Settings</span>
+                </a>
+                <a href="intent://com.sec.android.app.samsungapps/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-store text-lg text-red-500 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Galaxy Store</span>
+                </a>
+                <a href="intent://com.google.android.googlequicksearchbox/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fab fa-google text-lg text-blue-500 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Open Google</span>
+                </a>
+                <a href="intent://com.google.android.gms/#Intent;scheme=promote_smartlock_scheme;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-lock text-lg text-green-500 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Set Screen Lock</span>
+                </a>
+                <a href="intent://com.vivo.easyshare/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-share-alt text-lg text-cyan-400 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Easy Share</span>
                 </a>
 
-                <a href="intent://com.sec.android.app.samsungapps/#Intent;scheme=android-app;end" class="p-3 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded text-center transition flex flex-col items-center justify-center gap-1 group">
-                    <i class="fas fa-store text-xl text-red-500 group-hover:text-blue-400"></i>
-                    <span class="text-xs text-gray-400 font-medium">Galaxy Store</span>
+                <!-- Tambahan Menu Baru -->
+                <a href="intent://com.google.android.apps.googleassistant/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-microphone text-lg text-blue-400 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Google Assistant</span>
                 </a>
-
-                <a href="intent://com.google.android.googlequicksearchbox/#Intent;scheme=android-app;end" class="p-3 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded text-center transition flex flex-col items-center justify-center gap-1 group">
-                    <i class="fab fa-google text-xl text-blue-500 group-hover:text-blue-400"></i>
-                    <span class="text-xs text-gray-400 font-medium">Open Google</span>
+                <a href="intent://com.sec.android.app.myfiles/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-folder-open text-lg text-yellow-600 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Samsung My Files</span>
                 </a>
-
-                <a href="intent://com.google.android.gms/#Intent;scheme=promote_smartlock_scheme;end" class="p-3 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded text-center transition flex flex-col items-center justify-center gap-1 group">
-                    <i class="fas fa-lock text-xl text-green-500 group-hover:text-blue-400"></i>
-                    <span class="text-xs text-gray-400 font-medium">Set Screen Lock</span>
+                <a href="intent://com.mi.android.globalFileexplorer/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-folder text-lg text-orange-500 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Mi File Manager</span>
                 </a>
-
-                <a href="intent://com.vivo.easyshare/#Intent;scheme=android-app;end" class="p-3 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded text-center transition flex flex-col items-center justify-center gap-1 group">
-                    <i class="fas fa-share-alt text-xl text-cyan-400 group-hover:text-blue-400"></i>
-                    <span class="text-xs text-gray-400 font-medium">Easy Share</span>
+                <a href="intent://com.activitymanager/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-tasks text-lg text-purple-400 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Activity Manager</span>
+                </a>
+                <a href="https://apps.samsung.com/appquery/appDetail.as?appId=com.sec.android.app.sbrowser&cld-000005006635" target="_blank" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-globe text-lg text-blue-500 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Samsung Internet</span>
+                </a>
+                <a href="intent://com.sec.android.app.popupcalculator/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-calculator text-lg text-green-400 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Calculator</span>
+                </a>
+                <a href="https://galaxystore.samsung.com/detail/com.s9launcher.dir.launcher" target="_blank" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-rocket text-lg text-pink-500 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Samsung S9 Launcher</span>
+                </a>
+                <a href="tel:123456789" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-phone text-lg text-emerald-400 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Open Dial Pad</span>
+                </a>
+                <a href="https://com.google.android.gm/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-envelope text-lg text-red-400 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Open Gmail</span>
+                </a>
+                <a href="mailto:google@gmail.com" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="far fa-envelope text-lg text-red-300 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Open V2 Gmail</span>
+                </a>
+                <a href="intent://com.google.android.apps.maps/#Intent;scheme=android-app;end%22%3E" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-map-marked-alt text-lg text-green-400 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Google Map</span>
+                </a>
+                <a href="https://www.google.com/maps/place/new+delhi/data=!4m2!3m1!1s0x390cfd5b347eb62d:0x52c2b7494e204dce?sa=X&ved=1t:242&ictx=111" target="_blank" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-map text-lg text-teal-400 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Map V2</span>
+                </a>
+                <a href="intent://com.google.android.gsf.login.LoginActivity/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-user-circle text-lg text-indigo-400 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Login Account</span>
+                </a>
+                <a href="intent://com.sec.android.app.launcher/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-home text-lg text-slate-400 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Home Launcher</span>
+                </a>
+                <a href="https://galaxy.store/setting" target="_blank" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-sliders-h text-lg text-amber-500 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">Hidden Settings</span>
+                </a>
+                <a href="tel:100-000-000/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-hashtag text-lg text-yellow-400 group-hover:text-blue-400"></i>
+                    <span class="text-[10px] text-gray-400 leading-tight">*#0*# (ADB Tecno/Infinix)</span>
+                </a>
+                <a href="intent://com.sec.android.app.myfiles/#Intent;scheme=android-app;end" class="p-2.5 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded flex flex-col items-center justify-center gap-1 group transition">
+                    <i class="fas fa-folder text-lg text-yellow-500 group-hover:text-blue-400"></i>
+                    <span class="text-gray-400">File Manager</span>
                 </a>
 
             </div>
         </section>
 
+        <!-- SECTION 2: APK FILES TABLE -->
         <section>
             <h2 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-1">
                 <i class="fas fa-download text-blue-500"></i> FRP Bypass APK Files
@@ -69,47 +141,101 @@
                 <table class="w-full text-left border-collapse" id="apkTable">
                     <thead>
                         <tr class="bg-[#222227] border-b border-gray-800 text-[11px] font-bold text-gray-400 uppercase">
-                            <th class="p-2.5 pl-3">App Name & Description</th>
-                            <th class="p-2.5 text-right pr-3 w-28">Action</th>
+                            <th class="p-2.5 pl-3">App Name & Source Link</th>
+                            <th class="p-2.5 text-right pr-3 w-24">Link</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-800 text-xs">
                         
-                        <tr class="hover:bg-gray-800/30 transition table-row-item">
-                            <td class="p-2.5 pl-3">
-                                <div class="font-semibold text-blue-400 flex items-center gap-1">
-                                    <i class="fab fa-android text-green-500"></i> FRP_Bypass_v1.0.apk
-                                </div>
-                                <div class="text-[11px] text-gray-500 mt-0.5">Aplikasi bypass akun Google standar.</div>
-                            </td>
-                            <td class="p-2.5 text-right pr-3">
-                                <a href="https://www.mediafire.com/file/contoh1" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold px-2.5 py-1 rounded shadow-sm">Download</a>
-                            </td>
-                        </tr>
+                        <!-- Fungsi pembantu untuk mempermudah memasukkan data yang diberikan user -->
+                        <script>
+                            const listApk = [
+                                { name: "Open Alliance Shield", url: "intent://com.rrivenllc.shieldx/#Intent;scheme=android-app;end", type: "intent" },
+                                { name: "(OPEN)All Setting/Apps Tap to Open*", url: "https://frpbypass.romstage.com/frp-lock-bypass-tap-to-open-apps/", type: "web" },
+                                { name: "Alliance Shield.apk (Latest)", url: "https://github.com/filefrp/filefrp/raw/refs/heads/main/alliance-shield-x-0-9-10%20.apk", type: "apk" },
+                                { name: "Browse Galaxy Store", url: "https://www.samsung.com/fr/apps/galaxy-store/", type: "web" },
+                                { name: "Quick Shortcut Maker", url: "https://frpbypass.romstage.com/quick-shortcutmaker-apk/", type: "web" },
+                                { name: "Notification Bar Apk For Samsung", url: "https://frpbypass.romstage.com/wp-content/uploads/2022/09/Notification-Bar_frpbypass.romstage.apk", type: "apk" },
+                                { name: "Notification Bar apk all", url: "https://frpbypass.romstage.com/notification-bar-apk/", type: "web" },
+                                { name: "Package Disabler Pro Apk Direct", url: "https://frpbypass.romstage.com/wp-content/uploads/2022/09/Package-Disabler-Pro_frpbypass.romstage.apk", type: "apk" },
+                                { name: "Package Disabler Pro All apk", url: "https://frpbypass.romstage.com/package-disabler-pro-apk-download/", type: "web" },
+                                { name: "Disable SystemUI.xml", url: "https://apk.romstage.com/wp-content/uploads/2024/04/pd_disable_apps_disable_systemUI.xml", type: "xml" },
+                                { name: "Disable Google Services.xml", url: "https://apk.romstage.com/wp-content/uploads/2024/04/pd_disable_apps_disable_googleservice.xml", type: "xml" },
+                                { name: "Disable SystemUI/MDM/Google/Knox xml", url: "https://apk.romstage.com/wp-content/uploads/2024/04/pd_disable_apps_disable_mdmknox.xml", type: "xml" },
+                                { name: "Activity Launcher apk", url: "https://frpbypass.romstage.com/activity_launcher-1/", type: "web" },
+                                { name: "Factory Test apk", url: "https://frpbypass.romstage.com/factory-test-apk-vivo/", type: "web" },
+                                { name: "Google Account Manager All Version", url: "https://frpbypass.romstage.com/download-google-account-manager-apk/", type: "web" },
+                                { name: "Google Account Manager Android 10.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/10/GoogleAccountManager10.apk", type: "apk" },
+                                { name: "Google Account manager 9.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/10/Download-Google-Account-Manager-Android-9.0-Pie.apk", type: "apk" },
+                                { name: "Google Account Manager Android 8.1.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/10/Google-Account-Manager-8.1.apk", type: "apk" },
+                                { name: "Google Account Manager Android 8.0.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/10/Download-Google-Account-Manager-Android-8.0-Oreo.apk", type: "apk" },
+                                { name: "Download Google Account Manager 7.1.2.25-Nougat.apk", url: "https://github.com/filefrp/filefrp/raw/refs/heads/main/Google.Account.Version-7.1.2.25-Nougat.apk", type: "apk" },
+                                { name: "Google Account manager 6.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Google-accout-Maneger-Android_6.apk", type: "apk" },
+                                { name: "Google Account manager 5.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Google-accout-Maneger-Android_5_.apk", type: "apk" },
+                                { name: "Google Setting.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Google_Setting.apk", type: "apk" },
+                                { name: "Development setting.apk", url: "https://romstage.com/wp-content/uploads/2020/05/Development-setting.apk", type: "apk" },
+                                { name: "Quick Shortcut Maker.apk", url: "https://romstage.com/wp-content/uploads/2020/05/QuickShortcutMaker_2.4.0.apk", type: "apk" },
+                                { name: "Sidebar lite .apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2022/09/Sidebar-Lite-4.4.0frpbypass.romstage.apk", type: "apk" },
+                                { name: "Frp Android_7.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/FRP_Android_7.apk", type: "apk" },
+                                { name: "Romstage FRP.apk", url: "https://romstage.com/wp-content/uploads/2020/05/Romstage-Frp.apk", type: "apk" },
+                                { name: "Technocare.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Tecno-Care.apk", type: "apk" },
+                                { name: "FRP Bypass All.apk", url: "https://frpbypass.romstage.com/frp-bypass-apk/", type: "web" },
+                                { name: "TEST DPC 4.0.5.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/10/Testdpc_4.0.5.apk", type: "apk" },
+                                { name: "Test DPC.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Test_DPC.apk", type: "apk" },
+                                { name: "Apex Launcher.apk", url: "https://frpbypass.romstage.com/apex-launcher-apk-download/", type: "web" },
+                                { name: "nova Launcher.apk", url: "https://frpbypass.romstage.com/nova-launche-apk-dowmload/", type: "web" },
+                                { name: "Xshare.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2023/04/xshare-3-3-0-006.apk", type: "apk" },
+                                { name: "Menu Button.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Menu_Button.apk", type: "apk" },
+                                { name: "ES File Explorer.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/ES_File_Explorer.apk", type: "apk" },
+                                { name: "Download all File Explorer APK ALL", url: "https://frpbypass.romstage.com/file-explorer-apk-download/", type: "web" },
+                                { name: "Setting.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Setting.apk", type: "apk" },
+                                { name: "File_Commander_Manager.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/File_Commander_Manager.apk", type: "apk" },
+                                { name: "Phone_Clone.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Phone_Clone.apk", type: "apk" },
+                                { name: "Huawei Phone Clone.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2022/01/HuaweiPhoneClone.apk", type: "apk" },
+                                { name: "FactoryReset_v1.3.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2022/01/FactoryReset_v1.3.apk", type: "apk" },
+                                { name: "Calculator_1.0.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2022/01/Calculator_1.0.apk", type: "apk" },
+                                { name: "CROM Service v1.0.4.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2022/01/CROM_Serviceunlock_v1.0.4.apk", type: "apk" },
+                                { name: "Smart_Switch_Mobile.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Smart_Switch_Mobile.apk", type: "apk" },
+                                { name: "Hush SMS.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/HushSMS.apk", type: "apk" }
+                            ];
 
-                        <tr class="hover:bg-gray-800/30 transition table-row-item">
-                            <td class="p-2.5 pl-3">
-                                <div class="font-semibold text-blue-400 flex items-center gap-1">
-                                    <i class="fab fa-android text-green-500"></i> Apex_Launcher_3.3.3.apk
-                                </div>
-                                <div class="text-[11px] text-gray-500 mt-0.5">Akses ke home screen menu utama.</div>
-                            </td>
-                            <td class="p-2.5 text-right pr-3">
-                                <a href="https://www.mediafire.com/file/contoh2" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold px-2.5 py-1 rounded shadow-sm">Download</a>
-                            </td>
-                        </tr>
+                            // Generate tabel baris otomatis menggunakan looping agar kode bersih
+                            listApk.forEach(item => {
+                                let icon = "fa-android text-green-500";
+                                let btnText = "Download";
+                                let btnColor = "bg-blue-600 hover:bg-blue-700";
+                                let target = item.type !== "intent" ? 'target="_blank"' : '';
 
-                        <tr class="hover:bg-gray-800/30 transition table-row-item">
-                            <td class="p-2.5 pl-3">
-                                <div class="font-semibold text-blue-400 flex items-center gap-1">
-                                    <i class="fab fa-android text-green-500"></i> QuickShortcutMaker.apk
-                                </div>
-                                <div class="text-[11px] text-gray-500 mt-0.5">Membuat shortcut aktivitas sistem tersembunyi.</div>
-                            </td>
-                            <td class="p-2.5 text-right pr-3">
-                                <a href="https://www.mediafire.com/file/contoh3" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold px-2.5 py-1 rounded shadow-sm">Download</a>
-                            </td>
-                        </tr>
+                                if (item.type === "xml") {
+                                    icon = "fa-file-code text-amber-500";
+                                    btnText = "XML";
+                                    btnColor = "bg-amber-600 hover:bg-amber-700";
+                                } else if (item.type === "web") {
+                                    icon = "fa-globe text-blue-400";
+                                    btnText = "Visit/Open";
+                                    btnColor = "bg-teal-600 hover:bg-teal-700";
+                                } else if (item.type === "intent") {
+                                    icon = "fa-external-link-square-alt text-cyan-400";
+                                    btnText = "Open App";
+                                    btnColor = "bg-cyan-600 hover:bg-cyan-700";
+                                }
+
+                                document.write(`
+                                    <tr class="hover:bg-gray-800/30 transition table-row-item">
+                                        <td class="p-2.5 pl-3">
+                                            <div class="font-semibold text-blue-400 flex items-center gap-1.5">
+                                                <i class="fas ${icon} text-xs"></i> ${item.name}
+                                            </div>
+                                        </td>
+                                        <td class="p-2.5 text-right pr-3">
+                                            <a href="${item.url}" ${target} class="inline-block ${btnColor} text-white text-[10px] font-bold px-2.5 py-1 rounded shadow-sm transition">
+                                                ${btnText}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                `);
+                            });
+                        </script>
 
                     </tbody>
                 </table>
@@ -117,6 +243,7 @@
         </section>
     </main>
 
+    <!-- FOOTER -->
     <footer class="text-center py-6 text-[10px] text-gray-600 border-t border-gray-950 mt-12 bg-[#1a1a1e]">
         <p>&copy; 2026 BYPASS FRP GRATIS. For Technician & Educational Purpose Only.</p>
     </footer>
