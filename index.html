@@ -31,6 +31,14 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        /* Animasi berdenyut untuk tombol WA agar menarik perhatian */
+        @keyframes pulse-custom {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+            50% { transform: scale(1.05); box-shadow: 0 10px 15px -3px rgba(34,197,94,0.4); }
+        }
+        .animate-wa {
+            animation: pulse-custom 2s infinite ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-[#f8fafc] text-slate-800 dark:bg-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col transition-colors duration-200">
@@ -93,6 +101,12 @@
                 <a href="intent://com.sec.android.app.samsungapps/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-store text-2xl text-rose-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Galaxy Store</span>
+                </a>
+
+                <!-- V-Appstore (TAMBAHAN BARU) -->
+                <a href="intent://com.vivo.appstore/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
+                    <i class="fas fa-shopping-bag text-2xl text-blue-500 dark:text-blue-400"></i>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full font-semibold">V-Appstore</span>
                 </a>
 
                 <!-- Google -->
@@ -213,19 +227,19 @@
         </section>
 
         <!-- SECTION 2: APK FILES LIST/TABLE -->
-        <section>
+        <section class="mb-14">
             <h2 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1.5 px-1">
                 <i class="fas fa-download text-blue-500"></i> FRP Bypass APK Files
             </h2>
-            <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm transition-colors duration-200">
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-colors duration-200 dark:bg-slate-800 dark:border-slate-700">
                 <table class="w-full text-left border-collapse" id="apkTable">
                     <thead>
-                        <tr class="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                        <tr class="bg-slate-50 border-b border-slate-200 text-[10px] font-bold text-slate-500 uppercase tracking-wide dark:bg-slate-900 dark:border-slate-700 dark:text-slate-400">
                             <th class="p-3 pl-3.5">App Name & Source Link</th>
                             <th class="p-3 text-right pr-3.5 w-24">Link</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100 dark:divide-slate-700 text-xs">
+                    <tbody class="divide-y divide-slate-100 text-xs dark:divide-slate-700">
                         
                         <script>
                             const listApk = [
@@ -322,20 +336,25 @@
         </section>
     </main>
 
+    <!-- FLOATING WA DONATION BUTTON -->
+    <a href="https://wa.me/628987756556?text=Halo%20NDCTutorial%2C%20saya%20mau%20traktir%20kopi%20%2F%20donasi%20bantuan%20FRP%20Bypass." target="_blank" class="fixed bottom-4 right-4 z-50 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:bg-emerald-600 active:scale-90 transition-all animate-wa" title="Donasi / Traktir Kopi">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
     <!-- FOOTER -->
-    <footer class="text-center py-6 text-[10px] text-slate-400 dark:text-slate-500 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 mt-auto transition-colors duration-200">
+    <footer class="text-center py-6 text-[10px] text-slate-400 border-t border-slate-200 bg-white mt-auto transition-colors duration-200 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-500">
         <p>© 2026 BYPASS FRP GRATIS bY <a href="https://www.youtube.com/@NDCTutorial" target="_blank" class="hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors">https://www.youtube.com/@NDCTutorial</a>.</p>
     </footer>
 
     <script>
         let currentTypeFilter = 'all';
 
-        // --- SISTEM TEMA (LIGHT/DARK) ---
-        // Cek pengaturan sebelumnya di browser saat halaman pertama dimuat
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        // --- SISTEM TEMA DENGAN DEFAULT TERANG (LIGHT MODE) ---
+        if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.classList.add('dark');
             document.getElementById('themeIcon').className = 'fas fa-sun text-sm';
         } else {
+            // Selalu paksa masuk mode Terang jika memori browser kosong/light
             document.documentElement.classList.remove('dark');
             document.getElementById('themeIcon').className = 'fas fa-moon text-sm';
         }
@@ -370,7 +389,6 @@
         function filterType(type, buttonElement) {
             currentTypeFilter = type;
             
-            // Ubah gaya tombol aktif
             const buttons = document.getElementsByClassName("filter-tab-btn");
             for (let i = 0; i < buttons.length; i++) {
                 buttons[i].className = "filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all";
@@ -394,7 +412,6 @@
                 let matchSearch = false;
                 let matchType = false;
 
-                // Validasi Pencarian teks
                 if (td) {
                     const text = td.textContent || td.innerText;
                     if (text.toUpperCase().indexOf(filterSearch) > -1) {
@@ -402,12 +419,10 @@
                     }
                 }
 
-                // Validasi Kategori Filter Tab
                 if (currentTypeFilter === 'all' || rowType === currentTypeFilter) {
                     matchType = true;
                 }
 
-                // Tampilkan baris jika memenuhi kedua kriteria
                 if (matchSearch && matchType) {
                     rows[i].style.display = "";
                 } else {
