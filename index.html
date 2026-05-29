@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRP Bypass Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-[#121214] text-gray-200 antialiased font-sans">
+
+    <!-- HEADER -->
+    <header class="bg-[#1a1a1e] border-b border-gray-800 sticky top-0 z-50 shadow-md">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="flex items-center gap-2 font-bold text-base tracking-wide text-blue-400">
+                <i class="fas fa-unlock-alt text-yellow-500"></i> NDC FRP BYPASS
+            </h1>
+            <span class="text-[10px] bg-blue-950/50 border border-blue-800 text-blue-400 px-2 py-0.5 rounded font-mono">ONLINE v2026</span>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-4xl mx-auto px-3 py-5">
+
+        <!-- SEARCH BAR -->
+        <div class="mb-5 relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                <i class="fas fa-search text-xs"></i>
+            </span>
+            <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Cari APK atau Shortcut..." class="w-full pl-9 pr-4 py-2 bg-[#1a1a1e] border border-gray-800 rounded text-sm text-gray-200 focus:outline-none focus:border-blue-500 placeholder-gray-600">
+        </div>
+
+        <!-- SECTION 1: DIRECT OPEN SHORTCUTS -->
+        <section class="mb-6">
+            <h2 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-1">
+                <i class="fas fa-external-link-alt text-blue-500"></i> Open Settings & Apps Directly
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <!-- Open Settings -->
+                <a href="intent://com.android.settings/#Intent;scheme=android-shortcut;end" class="p-3 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded text-center transition flex flex-col items-center justify-center gap-1 group">
+                    <i class="fas fa-cog text-xl text-gray-400 group-hover:text-blue-400"></i>
+                    <span class="text-xs text-gray-400 font-medium">Open Settings</span>
+                </a>
+                <!-- Open Galaxy Store -->
+                <a href="intent://apps.samsung.com/appstore/#Intent;scheme=android-shortcut;end" class="p-3 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded text-center transition flex flex-col items-center justify-center gap-1 group">
+                    <i class="fas fa-store text-xl text-red-500 group-hover:text-blue-400"></i>
+                    <span class="text-xs text-gray-400 font-medium">Galaxy Store</span>
+                </a>
+                <!-- Open Google Search -->
+                <a href="intent:https://google.com#Intent;end" class="p-3 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded text-center transition flex flex-col items-center justify-center gap-1 group">
+                    <i class="fab fa-google text-xl text-blue-500 group-hover:text-blue-400"></i>
+                    <span class="text-xs text-gray-400 font-medium">Open Google</span>
+                </a>
+                <!-- Open Screen Lock -->
+                <a href="intent://com.android.settings.SetupChooseLockGeneric/#Intent;scheme=android-shortcut;end" class="p-3 bg-[#1a1a1e] hover:bg-gray-800/50 border border-gray-800 rounded text-center transition flex flex-col items-center justify-center gap-1 group">
+                    <i class="fas fa-lock text-xl text-green-500 group-hover:text-blue-400"></i>
+                    <span class="text-xs text-gray-400 font-medium">Set Screen Lock</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- SECTION 2: APK FILES TABLE -->
+        <section>
+            <h2 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-1">
+                <i class="fas fa-download text-blue-500"></i> FRP Bypass APK Files
+            </h2>
+            <div class="bg-[#1a1a1e] border border-gray-800 rounded overflow-hidden shadow-xl">
+                <table class="w-full text-left border-collapse" id="apkTable">
+                    <thead>
+                        <tr class="bg-[#222227] border-b border-gray-800 text-[11px] font-bold text-gray-400 uppercase">
+                            <th class="p-2.5 pl-3">App Name & Description</th>
+                            <th class="p-2.5 text-right pr-3 w-28">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-800 text-xs">
+                        <!-- Baris 1 -->
+                        <tr class="hover:bg-gray-800/30 transition table-row-item">
+                            <td class="p-2.5 pl-3">
+                                <div class="font-semibold text-blue-400 flex items-center gap-1">
+                                    <i class="fab fa-android text-green-500"></i> FRP_Bypass_v1.0.apk
+                                </div>
+                                <div class="text-[11px] text-gray-500 mt-0.5">Aplikasi bypass akun Google standar.</div>
+                            </td>
+                            <td class="p-2.5 text-right pr-3">
+                                <a href="https://www.mediafire.com/file/contoh1" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold px-2.5 py-1 rounded shadow-sm">Download</a>
+                            </td>
+                        </tr>
+                        <!-- Baris 2 -->
+                        <tr class="hover:bg-gray-800/30 transition table-row-item">
+                            <td class="p-2.5 pl-3">
+                                <div class="font-semibold text-blue-400 flex items-center gap-1">
+                                    <i class="fab fa-android text-green-500"></i> Apex_Launcher_3.3.3.apk
+                                </div>
+                                <div class="text-[11px] text-gray-500 mt-0.5">Akses ke home screen menu utama.</div>
+                            </td>
+                            <td class="p-2.5 text-right pr-3">
+                                <a href="https://www.mediafire.com/file/contoh2" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold px-2.5 py-1 rounded shadow-sm">Download</a>
+                            </td>
+                        </tr>
+                        <!-- Baris 3 -->
+                        <tr class="hover:bg-gray-800/30 transition table-row-item">
+                            <td class="p-2.5 pl-3">
+                                <div class="font-semibold text-blue-400 flex items-center gap-1">
+                                    <i class="fab fa-android text-green-500"></i> QuickShortcutMaker.apk
+                                </div>
+                                <div class="text-[11px] text-gray-500 mt-0.5">Membuat shortcut aktivitas sistem.</div>
+                            </td>
+                            <td class="p-2.5 text-right pr-3">
+                                <a href="https://www.mediafire.com/file/contoh3" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold px-2.5 py-1 rounded shadow-sm">Download</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-6 text-[10px] text-gray-600 border-t border-gray-950 mt-12 bg-[#1a1a1e]">
+        <p>&copy; 2026 NDC FRP Directory. For Technician & Educational Purpose Only.</p>
+    </footer>
+
+    <script>
+        function searchTable() {
+            var input = document.getElementById("searchInput").value.toUpperCase();
+            var rows = document.getElementsByClassName("table-row-item");
+            for (var i = 0; i < rows.length; i++) {
+                var td = rows[i].getElementsByTagName("td")[0];
+                if (td) {
+                    var text = td.textContent || td.innerText;
+                    rows[i].style.display = text.toUpperCase().indexOf(input) > -1 ? "" : "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
