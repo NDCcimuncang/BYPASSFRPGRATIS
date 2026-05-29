@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
-        // Konfigurasi Tailwind untuk mendukung Class-based Dark Mode
         tailwind.config = {
             darkMode: 'class',
         }
@@ -23,7 +22,6 @@
         html, body {
             overflow-x: hidden;
         }
-        /* Menyembunyikan scrollbar pada filter tabs di HP */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -31,7 +29,6 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        /* Animasi berdenyut untuk tombol WA agar menarik perhatian */
         @keyframes pulse-custom {
             0%, 100% { transform: scale(1); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
             50% { transform: scale(1.05); box-shadow: 0 10px 15px -3px rgba(34,197,94,0.4); }
@@ -39,11 +36,17 @@
         .animate-wa {
             animation: pulse-custom 2s infinite ease-in-out;
         }
+        @keyframes fade-in-modal {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .animate-fade-in {
+            animation: fade-in-modal 0.2s ease-out;
+        }
     </style>
 </head>
 <body class="bg-[#f8fafc] text-slate-800 dark:bg-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col transition-colors duration-200">
 
-    <!-- HEADER -->
     <header class="bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 shadow-sm transition-colors duration-200">
         <div class="max-w-4xl mx-auto px-4 py-3.5 flex justify-between items-center">
             <h1 class="flex items-center gap-2 font-bold text-sm sm:text-base tracking-wide text-blue-600 dark:text-blue-400 uppercase">
@@ -51,7 +54,6 @@
             </h1>
             
             <div class="flex items-center gap-3">
-                <!-- Theme Toggle Button -->
                 <button onclick="toggleTheme()" class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-amber-400 hover:scale-105 active:scale-95 transition-all" title="Ubah Tema">
                     <i id="themeIcon" class="fas fa-moon text-sm"></i>
                 </button>
@@ -60,10 +62,8 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
     <main class="max-w-4xl mx-auto px-3 py-4 w-full flex-grow">
 
-        <!-- SEARCH BAR -->
         <div class="mb-3 relative">
             <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
                 <i class="fas fa-search text-xs"></i>
@@ -74,7 +74,6 @@
             </button>
         </div>
 
-        <!-- QUICK FILTER TABS -->
         <div class="flex gap-1.5 overflow-x-auto pb-3.5 mb-2.5 no-scrollbar text-[11px] font-semibold select-none">
             <button onclick="filterType('all', this)" class="filter-tab-btn bg-blue-600 text-white px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all">Semua File</button>
             <button onclick="filterType('apk', this)" class="filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all">🤖 Android APK</button>
@@ -83,7 +82,6 @@
             <button onclick="filterType('web', this)" class="filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all">🌐 Link Web</button>
         </div>
 
-        <!-- SECTION 1: DIRECT OPEN SHORTCUTS -->
         <section class="mb-5">
             <h2 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2.5 flex items-center gap-1.5 px-1">
                 <i class="fas fa-external-link-alt text-blue-500"></i> Open Settings & Apps Directly
@@ -91,133 +89,111 @@
             
             <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1.5 text-center text-[11px]">
                 
-                <!-- Settings -->
                 <a href="intent://com.android.settings/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-cog text-2xl text-slate-600 dark:text-slate-400"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Settings</span>
                 </a>
 
-                <!-- Galaxy Store -->
                 <a href="intent://com.sec.android.app.samsungapps/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-store text-2xl text-rose-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Galaxy Store</span>
                 </a>
 
-                <!-- V-Appstore (TAMBAHAN BARU) -->
                 <a href="intent://com.vivo.appstore/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-shopping-bag text-2xl text-blue-500 dark:text-blue-400"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full font-semibold">V-Appstore</span>
                 </a>
 
-                <!-- Google -->
                 <a href="intent://com.google.android.googlequicksearchbox/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fab fa-google text-2xl text-blue-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Google</span>
                 </a>
 
-                <!-- Smartlock -->
                 <a href="intent://com.google.android.gms/#Intent;scheme=promote_smartlock_scheme;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-key text-2xl text-emerald-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Smartlock</span>
                 </a>
 
-                <!-- Easy Share -->
                 <a href="intent://com.vivo.easyshare/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-exchange-alt text-2xl text-cyan-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Easy Share</span>
                 </a>
 
-                <!-- Oppo Clone Phone -->
                 <a href="intent://com.coloros.backuprestore/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-mobile-alt text-2xl text-green-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Oppo Clone</span>
                 </a>
 
-                <!-- Assistant -->
                 <a href="intent://com.google.android.apps.googleassistant/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-microphone text-2xl text-indigo-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Assistant</span>
                 </a>
 
-                <!-- Samsung Files -->
                 <a href="intent://com.sec.android.app.myfiles/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-folder text-2xl text-orange-400"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Samsung File</span>
                 </a>
 
-                <!-- Mi Files -->
                 <a href="intent://com.mi.android.globalFileexplorer/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-folder-open text-2xl text-amber-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Mi Files</span>
                 </a>
 
-                <!-- Activity Manager -->
                 <a href="intent://com.activitymanager/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-bolt text-2xl text-purple-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Activity Mngr</span>
                 </a>
 
-                <!-- Samsung Web -->
                 <a href="https://apps.samsung.com/appquery/appDetail.as?appId=com.sec.android.app.sbrowser&cld-000005006635" target="_blank" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-globe-asia text-2xl text-blue-600"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Samsung Web</span>
                 </a>
 
-                <!-- Calculator -->
                 <a href="intent://com.sec.android.app.popupcalculator/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-calculator text-2xl text-teal-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Calculator</span>
                 </a>
 
-                <!-- S9 Launcher -->
                 <a href="https://galaxystore.samsung.com/detail/com.s9launcher.dir.launcher" target="_blank" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-rocket text-2xl text-fuchsia-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">S9 Launcher</span>
                 </a>
 
-                <!-- Dial Pad -->
                 <a href="tel:123456789" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-phone-alt text-2xl text-emerald-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Dial Pad</span>
                 </a>
 
-                <!-- Gmail -->
                 <a href="https://com.google.android.gm/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-envelope text-2xl text-red-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Gmail</span>
                 </a>
 
-                <!-- Google Maps -->
                 <a href="intent://com.google.android.apps.maps/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-map-marked-alt text-2xl text-rose-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Map</span>
                 </a>
 
-                <!-- Login Account -->
                 <a href="intent://com.google.android.gsf.login.LoginActivity/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-user-circle text-2xl text-indigo-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Login Account</span>
                 </a>
 
-                <!-- Home Launcher -->
                 <a href="intent://com.sec.android.app.launcher/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-home text-2xl text-slate-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Home Launch</span>
                 </a>
 
-                <!-- Hidden Settings -->
                 <a href="https://galaxy.store/setting" target="_blank" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-sliders-h text-2xl text-amber-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Hidden Set</span>
                 </a>
 
-                <!-- ADB Code -->
                 <a href="tel:100-000-000/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-hashtag text-2xl text-amber-600"></i>
                     <span class="text-[9px] text-slate-600 dark:text-slate-400 font-bold leading-none select-all">*#0*# (ADB)</span>
                 </a>
 
-                <!-- Files Generic -->
                 <a href="intent://com.sec.android.app.myfiles/#Intent;scheme=android-app;end" class="p-2 bg-white dark:bg-slate-800 active:bg-slate-100 dark:active:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 duration-75 min-h-[76px]">
                     <i class="fas fa-folder text-2xl text-yellow-500"></i>
                     <span class="text-slate-600 dark:text-slate-300 font-medium leading-tight truncate w-full">Files</span>
@@ -226,7 +202,6 @@
             </div>
         </section>
 
-        <!-- SECTION 2: APK FILES LIST/TABLE -->
         <section class="mb-14">
             <h2 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1.5 px-1">
                 <i class="fas fa-download text-blue-500"></i> FRP Bypass APK Files
@@ -268,99 +243,47 @@
                                 { name: "Google Setting.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Google_Setting.apk", type: "apk" },
                                 { name: "Development setting.apk", url: "https://romstage.com/wp-content/uploads/2020/05/Development-setting.apk", type: "apk" },
                                 { name: "Quick Shortcut Maker.apk", url: "https://romstage.com/wp-content/uploads/2020/05/QuickShortcutMaker_2.4.0.apk", type: "apk" },
-                                { name: "Sidebar lite .apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2022/09/Sidebar-Lite-4.4.0frpbypass.romstage.apk", type: "apk" },
-                                { name: "Frp Android_7.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/FRP_Android_7.apk", type: "apk" },
-                                { name: "Romstage FRP.apk", url: "https://romstage.com/wp-content/uploads/2020/05/Romstage-Frp.apk", type: "apk" },
-                                { name: "Technocare.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Tecno-Care.apk", type: "apk" },
-                                { name: "FRP Bypass All.apk", url: "https://frpbypass.romstage.com/frp-bypass-apk/", type: "web" },
-                                { name: "TEST DPC 4.0.5.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/10/Testdpc_4.0.5.apk", type: "apk" },
-                                { name: "Test DPC.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Test_DPC.apk", type: "apk" },
-                                { name: "Apex Launcher.apk", url: "https://frpbypass.romstage.com/apex-launcher-apk-download/", type: "web" },
-                                { name: "nova Launcher.apk", url: "https://frpbypass.romstage.com/nova-launche-apk-dowmload/", type: "web" },
-                                { name: "Xshare.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2023/04/xshare-3-3-0-006.apk", type: "apk" },
-                                { name: "Menu Button.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Menu_Button.apk", type: "apk" },
-                                { name: "ES File Explorer.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/ES_File_Explorer.apk", type: "apk" },
-                                { name: "Download all File Explorer APK ALL", url: "https://frpbypass.romstage.com/file-explorer-apk-download/", type: "web" },
-                                { name: "Setting.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Setting.apk", type: "apk" },
-                                { name: "File_Commander_Manager.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/File_Commander_Manager.apk", type: "apk" },
-                                { name: "Phone_Clone.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Phone_Clone.apk", type: "apk" },
-                                { name: "Huawei Phone Clone.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2022/01/HuaweiPhoneClone.apk", type: "apk" },
-                                { name: "FactoryReset_v1.3.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2022/01/FactoryReset_v1.3.apk", type: "apk" },
-                                { name: "Calculator_1.0.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2022/01/Calculator_1.0.apk", type: "apk" },
-                                { name: "CROM Service v1.0.4.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2022/01/CROM_Serviceunlock_v1.0.4.apk", type: "apk" },
-                                { name: "Smart_Switch_Mobile.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/Smart_Switch_Mobile.apk", type: "apk" },
-                                { name: "Hush SMS.apk", url: "https://frpbypass.romstage.com/wp-content/uploads/2020/09/HushSMS.apk", type: "apk" }
-                            ];
-
-                            listApk.forEach(item => {
-                                let icon = "fa-android text-emerald-500";
-                                let btnText = "APK";
-                                let btnColor = "bg-blue-600 active:bg-blue-700 shadow-sm shadow-blue-100 dark:shadow-none";
-                                let target = item.type !== "intent" ? 'target="_blank"' : '';
-
-                                if (item.type === "xml") {
-                                    icon = "fa-file-code text-amber-500";
-                                    btnText = "XML";
-                                    btnColor = "bg-amber-500 active:bg-amber-600 shadow-sm shadow-amber-100 dark:shadow-none";
-                                } else if (item.type === "web") {
-                                    icon = "fa-globe text-blue-500";
-                                    btnText = "Web";
-                                    btnColor = "bg-slate-700 active:bg-slate-800 dark:bg-slate-600 dark:active:bg-slate-500 shadow-sm";
-                                } else if (item.type === "intent") {
-                                    icon = "fa-external-link-square-alt text-cyan-500";
-                                    btnText = "Open";
-                                    btnColor = "bg-cyan-600 active:bg-cyan-700 shadow-sm shadow-cyan-100 dark:shadow-none";
-                                }
-
-                                document.write(`
-                                    <tr class="active:bg-slate-50 dark:active:bg-slate-700/50 transition duration-75 table-row-item" data-type="${item.type}">
-                                        <td class="p-3 pl-3.5 pr-1">
-                                            <div class="font-semibold text-slate-700 dark:text-slate-300 flex items-start gap-2 max-w-[210px] sm:max-w-none break-words">
-                                                <i class="fas ${icon} text-sm mt-0.5 flex-shrink-0"></i> 
-                                                <span class="leading-snug">${item.name}</span>
-                                            </div>
-                                        </td>
-                                        <td class="p-3 text-right pr-3.5">
-                                            <a href="${item.url}" ${target} class="inline-block ${btnColor} text-white text-[11px] font-bold px-3 py-2 rounded-lg transition active:scale-90 min-w-[58px] text-center select-none">
-                                                ${btnText}
-                                            </a>
-                                        </td>
-                                    </tr>
-                                `);
-                            });
-                        </script>
-
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </main>
-
-<!-- FLOATING DONATION BUTTON (DIARAHKAN KE DANA) -->
-    <a href="https://link.dana.id/qr/5n4m4u1" 
-       target="_blank" 
-       class="fixed bottom-4 right-4 z-50 flex items-center gap-2 group active:scale-95 transition-all" 
+                               ```html
+    <button onclick="openDonationModal()" 
+       class="fixed bottom-4 right-4 z-50 flex items-center gap-2 group active:scale-95 transition-all focus:outline-none" 
        title="Donasi / Traktir Kopi">
         
-        <!-- Teks Label -->
-        <span class="bg-white/95 text-slate-700 border border-slate-200 dark:bg-slate-800/95 dark:text-slate-200 dark:border-slate-700 text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-md whitespace-nowrap tracking-wide">
-            ☕ Traktir Kopi
+        <span class="bg-white/95 text-slate-700 border border-slate-200 dark:bg-slate-800/95 dark:text-slate-200 dark:border-slate-700 text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-md whitespace-nowrap tracking-wide transition-all duration-200">
+            ☕ Donasi / Traktir Kopi
         </span>
 
-        <!-- Icon Bulat (Warna Biru DANA) -->
-        <div class="bg-blue-500 text-white w-13 h-13 sm:w-14 sm:h-14 rounded-full flex items-center justify-center shadow-xl hover:bg-blue-600 animate-wa flex-shrink-0">
-            <i class="fas fa-wallet text-xl sm:text-2xl"></i>
+        <div class="bg-amber-500 text-white w-13 h-13 sm:w-14 sm:h-14 rounded-full flex items-center justify-center shadow-xl hover:bg-amber-600 animate-wa flex-shrink-0">
+            <i class="fas fa-qrcode text-xl sm:text-2xl"></i>
         </div>
-    </a>
-        <!-- Icon WhatsApp Berdenyut -->
-        <div class="bg-emerald-500 text-white w-13 h-13 sm:w-14 sm:h-14 rounded-full flex items-center justify-center shadow-xl hover:bg-emerald-600 animate-wa flex-shrink-0">
-            <i class="fab fa-whatsapp text-2xl sm:text-3xl"></i>
-        </div>
-    </a>
+    </button>
 
-    <!-- FOOTER -->
+    <div id="donationModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-700 text-center relative animate-fade-in transition-transform duration-300 transform scale-95 opacity-0">
+            
+            <button onclick="closeDonationModal()" class="absolute top-3.5 right-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl focus:outline-none">
+                <i class="fas fa-times-circle"></i>
+            </button>
+
+            <h3 class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-1 uppercase tracking-wider">Traktir Kopi / Donasi</h3>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 mb-5">Donasi / Traktir Kopi untuk: <span class="font-bold text-slate-800 dark:text-slate-100">MS COMPUTER</span>. Scan menggunakan DANA, OVO, GoPay, LinkAja atau Banking Anda.</p>
+            
+            <div class="bg-white p-3 rounded-xl inline-block border border-slate-100 mx-auto mb-5 shadow-inner">
+                <img src="image_0.png" alt="Kode QR Donasi MS COMPUTER" class="w-48 h-48 object-contain">
+            </div>
+
+            <div class="space-y-3">
+                <div class="text-[11px] font-mono bg-slate-50 dark:bg-slate-900/50 p-2.5 rounded-lg border border-slate-100 dark:border-slate-700 text-slate-600 dark:text-slate-300">
+                    No. DANA: <span class="font-bold text-blue-600 dark:text-blue-400 select-all tracking-wider">08987756556</span>
+                </div>
+                <div class="text-[9px] text-slate-400 dark:text-slate-500 font-semibold uppercase tracking-widest bg-slate-100/50 dark:bg-slate-900 p-2 rounded-full border border-slate-200 dark:border-slate-800">
+                    <i class="fas fa-check-circle text-emerald-500 mr-1.5"></i> Pastikan nama merchant: <span class="font-bold text-slate-800 dark:text-slate-200">MS COMPUTER</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="text-center py-6 text-[10px] text-slate-400 border-t border-slate-200 bg-white mt-auto transition-colors duration-200 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-500">
-        <p>© 2026 BYPASS FRP GRATIS bY <a href="https://www.youtube.com/@NDCTutorial" target="_blank" class="hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors">https://www.youtube.com/@NDCTutorial</a>.</p>
+        <p>© 2026 BYPASS FRP GRATIS bY <a href="[https://www.youtube.com/@NDCTutorial](https://www.youtube.com/@NDCTutorial)" target="_blank" class="hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors">[https://www.youtube.com/@NDCTutorial](https://www.youtube.com/@NDCTutorial)</a>.</p>
     </footer>
 
     <script>
@@ -371,7 +294,7 @@
             document.documentElement.classList.add('dark');
             document.getElementById('themeIcon').className = 'fas fa-sun text-sm';
         } else {
-            // Selalu paksa masuk mode Terang jika memori browser kosong/light
+            // Default awal otomatis ke mode terang jika tidak ada rekaman dark mode sebelumnya
             document.documentElement.classList.remove('dark');
             document.getElementById('themeIcon').className = 'fas fa-moon text-sm';
         }
@@ -453,6 +376,40 @@
             document.getElementById("clearBtn").classList.add("hidden");
             applySearchAndFilter();
         }
+
+        // --- SISTEM POP-UP DONASI MODAL ---
+        function openDonationModal() {
+            const modal = document.getElementById('donationModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // Menambahkan delay kecil untuk animasi transisi mulus
+            setTimeout(() => {
+                modal.querySelector('.animate-fade-in').classList.add('opacity-100', 'scale-100');
+                modal.querySelector('.animate-fade-in').classList.remove('opacity-0', 'scale-95');
+            }, 10);
+        }
+
+        function closeDonationModal() {
+            const modal = document.getElementById('donationModal');
+            const modalContent = modal.querySelector('.animate-fade-in');
+            
+            // Animasi transisi keluar
+            modalContent.classList.add('opacity-0', 'scale-95');
+            modalContent.classList.remove('opacity-100', 'scale-100');
+            
+            // Menghilangkan modal setelah animasi selesai
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 300); // Harus sama dengan durasi transisi
+        }
+
+        // Menutup modal jika pengguna mengklik area luar kotak
+        document.getElementById('donationModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeDonationModal();
+            }
+        });
     </script>
 </body>
 </html>
