@@ -56,17 +56,6 @@
     </header>
 
     <main class="max-w-4xl mx-auto px-3 py-4 w-full flex-grow">
-
-        <div class="mb-3 relative">
-            <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
-                <i class="fas fa-search text-xs"></i>
-            </span>
-            <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Cari APK, XML, atau Shortcut..." class="w-full pl-9 pr-8 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 dark:focus:ring-blue-500/20 placeholder-slate-400 dark:placeholder-slate-500 shadow-sm transition-all duration-200">
-            <button onclick="clearSearch()" id="clearBtn" class="hidden absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
-                <i class="fas fa-times-circle text-sm"></i>
-            </button>
-        </div>
-
         <div class="flex gap-1.5 overflow-x-auto pb-3.5 mb-2.5 no-scrollbar text-[11px] font-semibold select-none">
             <button onclick="filterType('all', this)" class="filter-tab-btn bg-blue-600 text-white px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all">Semua File</button>
             <button onclick="filterType('apk', this)" class="filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all">🤖 Android APK</button>
@@ -75,21 +64,7 @@
             <button onclick="filterType('web', this)" class="filter-tab-btn bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3.5 py-2 rounded-xl whitespace-nowrap shadow-sm transition-all">🌐 Link Web</button>
         </div>
 
-        <!-- 1. WIDGET STATUS SERVER -->
-        <section class="mb-5">
-            <div class="bg-white border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-xl p-3 shadow-sm flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-server text-blue-500 text-sm"></i>
-                    <span class="text-xs font-semibold text-slate-600 dark:text-slate-300">Status Mirror Server Link</span>
-                </div>
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    OPERATIONAL (100% ONLINE)
-                </span>
-            </div>
-        </section>
-
-        <section class="mb-5">
+         <section class="mb-5">
             <h2 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2.5 flex items-center gap-1.5 px-1">
                 <i class="fas fa-external-link-alt text-blue-500"></i> Open Settings & Apps Directly
             </h2>
@@ -272,47 +247,79 @@
                             ];
 
                             listApk.forEach(item => {
-                                let icon = "fa-android text-emerald-500";
-                                let btnText = "APK";
-                                let btnColor = "bg-blue-600 active:bg-blue-700 shadow-sm shadow-blue-100 dark:shadow-none";
-                                let target = item.type !== "intent" ? 'target="_blank"' : '';
+    let icon = "fa-android text-emerald-500";
+    let btnText = "APK";
+    let btnColor = "bg-blue-600 active:bg-blue-700 shadow-sm shadow-blue-100 dark:shadow-none";
+    
+    // Tentukan aksi klik berdasarkan type link
+    let clickAction = "";
+    if (item.type === "intent") {
+        clickAction = `window.location.href='${item.url}';`;
+    } else {
+        clickAction = `window.open('${item.url}', '_blank');`;
+    }
 
-                                if (item.type === "xml") {
-                                    icon = "fa-file-code text-amber-500";
-                                    btnText = "XML";
-                                    btnColor = "bg-amber-500 active:bg-amber-600 shadow-sm shadow-amber-100 dark:shadow-none";
-                                } else if (item.type === "web") {
-                                    icon = "fa-globe text-blue-500";
-                                    btnText = "Web";
-                                    btnColor = "bg-slate-700 active:bg-slate-800 dark:bg-slate-600 dark:active:bg-slate-500 shadow-sm";
-                                } else if (item.type === "intent") {
-                                    icon = "fa-external-link-square-alt text-cyan-500";
-                                    btnText = "Open";
-                                    btnColor = "bg-cyan-600 active:bg-cyan-700 shadow-sm shadow-cyan-100 dark:shadow-none";
-                                }
+    if (item.type === "xml") {
+        icon = "fa-file-code text-amber-500";
+        btnText = "XML";
+        btnColor = "bg-amber-500 active:bg-amber-600 shadow-sm shadow-amber-100 dark:shadow-none";
+    } else if (item.type === "web") {
+        icon = "fa-globe text-blue-500";
+        btnText = "Web";
+        btnColor = "bg-slate-700 active:bg-slate-800 dark:bg-slate-600 dark:active:bg-slate-500 shadow-sm";
+    } else if (item.type === "intent") {
+        icon = "fa-external-link-square-alt text-cyan-500";
+        btnText = "Open";
+        btnColor = "bg-cyan-600 active:bg-cyan-700 shadow-sm shadow-cyan-100 dark:shadow-none";
+    }
 
-                                document.write(`
-                                    <tr class="active:bg-slate-50 dark:active:bg-slate-700/50 transition duration-75 table-row-item" data-type="${item.type}">
-                                        <td class="p-3 pl-3.5 pr-1">
-                                            <div class="font-semibold text-slate-700 dark:text-slate-300 flex items-start gap-2 max-w-[210px] sm:max-w-none break-words">
-                                                <i class="fas ${icon} text-sm mt-0.5 flex-shrink-0"></i> 
-                                                <span class="leading-snug">${item.name}</span>
-                                            </div>
-                                        </td>
-                                        <td class="p-3 text-right pr-3.5">
-                                            <a href="${item.url}" ${target} class="inline-block ${btnColor} text-white text-[11px] font-bold px-3 py-2 rounded-lg transition active:scale-90 min-w-[58px] text-center select-none">
-                                                ${btnText}
-                                            </a>
-                                        </td>
-                                    </tr>
-                                `);
-                            });
+    document.write(`
+        <tr onclick="${clickAction}" class="cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/30 active:bg-slate-100 dark:active:bg-slate-700/60 transition duration-75 table-row-item" data-type="${item.type}">
+            <td class="p-3 pl-3.5 pr-1">
+                <div class="font-semibold text-slate-700 dark:text-slate-300 flex items-start gap-2 max-w-[210px] sm:max-w-none break-words">
+                    <i class="fas ${icon} text-sm mt-0.5 flex-shrink-0"></i> 
+                    <span class="leading-snug">${item.name}</span>
+                </div>
+            </td>
+            <td class="p-3 text-right pr-3.5">
+                <button class="inline-block ${btnColor} text-white text-[11px] font-bold px-3 py-2 rounded-lg transition min-w-[58px] text-center select-none pointer-events-none">
+                    ${btnText}
+                </button>
+            </td>
+        </tr>
+    `);
+});
                         </script>
                     </tbody>
                 </table>
             </div>
         </section>
 
+ <section class="mb-5">
+    <h2 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2.5 flex items-center gap-1.5 px-1">
+        <i class="fab fa-youtube text-red-500 text-sm"></i> Ndroid Channel Tutorial
+    </h2>
+    <a href="https://youtu.be/kbX97qLHSSg" target="_blank" class="block bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm dark:bg-slate-800 dark:border-slate-700 p-2 active:scale-[0.99] transition duration-75">
+        <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-900 flex items-center justify-center group">
+            <img src="https://img.youtube.com/vi/kbX97qLHSSg/maxresdefault.jpg" alt="Thumbnail Video" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-300">
+            
+            <div class="absolute inset-0 bg-slate-900/20"></div>
+            
+            <div class="relative w-12 h-12 rounded-full bg-red-600 flex items-center justify-center text-white text-lg shadow-md animate-pulse">
+                <i class="fas fa-play ml-1"></i>
+            </div>
+        </div>
+        <div class="p-2 pt-3 flex items-center justify-between">
+            <div>
+                <h3 class="font-bold text-xs text-slate-700 dark:text-slate-200 leading-snug">Tutorial Lengkap Bypass FRP Terbaru</h3>
+                <p class="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">Klik untuk menonton langsung di YouTube</p>
+            </div>
+            <span class="text-[10px] bg-red-50 border border-red-200 text-red-600 dark:bg-red-950/50 dark:border-red-900 dark:text-red-400 px-2 py-1 rounded-lg font-bold tracking-wide flex items-center gap-1 shrink-0">
+                <i class="fab fa-youtube"></i> WATCH
+            </span>
+        </div>
+    </a>
+</section>
         <!-- 4. COUNTER SUKSES & STATISTIK PENGUNJUNG (NILAI DEFAULT BERSIFAT DINAMIS) -->
         <section class="mb-10 max-w-md mx-auto grid grid-cols-2 gap-3.5">
             <!-- Counter Sukses Bypass -->
@@ -355,12 +362,12 @@
                 <i class="fas fa-times-circle"></i>
             </button>
 
-            <h3 class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-1 uppercase tracking-wider">☕ Traktir Kopi / Donasi</h3>
+            <h3 class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-1 uppercase tracking-wider">☕ Traktir Kopi</h3>
             <p class="text-[11px] text-slate-500 dark:text-slate-400 mb-4">Dukung perkembangan channel agar terus update file gratis!</p>
             
             <div class="bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 p-4 rounded-xl mb-4 font-semibold text-xs text-slate-600 dark:text-slate-300">
                 <p class="mb-1">Dana / GoPay / OVO :</p>
-                <p class="text-base text-blue-600 dark:text-blue-400 font-bold tracking-wide">0898-7756-556 a/n Muhamad Arip</p>
+                <p class="text-base text-blue-600 dark:text-blue-400 font-bold tracking-wide">0898-7756-556</p>
             </div>
 
             <button onclick="closeDonationModal()" class="w-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold py-2 rounded-xl">Tutup</button>
@@ -491,6 +498,6 @@ function initCounters() {
 
 // Jalankan counter setelah halaman termuat sempurna
 window.addEventListener('DOMContentLoaded', initCounters);
-    </script>
-</body>
+      </script>
+   </body>
 </html>
